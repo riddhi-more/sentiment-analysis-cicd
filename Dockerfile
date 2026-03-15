@@ -13,9 +13,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy all code
 COPY src/ ./src/
 COPY tests/ ./tests/
+COPY models/ ./models/
 
 # Set environment variable
 ENV PYTHONUNBUFFERED=1
 
-# Default command: Run tests
-CMD ["pytest", "tests/", "-v"]
+# Run the API server (not tests)
+CMD ["uvicorn", "src.api:app", "--host", "0.0.0.0", "--port", "8000"]
